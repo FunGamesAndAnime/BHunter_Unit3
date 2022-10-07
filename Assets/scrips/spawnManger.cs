@@ -5,12 +5,13 @@ using UnityEngine;
 public class spawnManger : MonoBehaviour
 {
     public GameObject obsPrefab;
+    private playerContralor playerCtrl;
     private Vector3 spawnpos = new Vector3(15, 0, 0);
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("spawnObs", 2, 2);
-        
+        playerCtrl = GameObject.Find("player").GetComponent<playerContralor>();
     }
 
     // Update is called once per frame
@@ -20,7 +21,10 @@ public class spawnManger : MonoBehaviour
     }
     void spawnObs()
     {
-        Instantiate(obsPrefab, spawnpos, obsPrefab.transform.rotation);
+        if (playerCtrl.gameOver == false)
+        {
+            Instantiate(obsPrefab, spawnpos, obsPrefab.transform.rotation);
+        }
     }
     
 }
